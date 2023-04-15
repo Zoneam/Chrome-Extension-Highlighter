@@ -1,0 +1,40 @@
+.highlight-element {
+    background-color: rgba(99, 94, 88, 0.071);
+    outline: 2px solid rgb(238, 12, 68) !important;
+  }
+  
+  .element-info-box {
+    outline: 2px solid rgb(12, 80, 238) !important;
+    background-color: rgba(70, 70, 70, 0.9);
+    color: white;
+    font-size: 14px;
+    font-family: sans-serif;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .element-info-box div {
+    margin-bottom: 4px;
+  }
+  
+  .element-info-box div:last-child {
+    margin-bottom: 0;
+  }
+  
+  .tag-name-row {
+    color: rgb(160, 159, 254);
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  
+  .class-row {
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  
