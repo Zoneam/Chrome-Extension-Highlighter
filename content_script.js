@@ -1,3 +1,13 @@
+let isActivated = false;
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'toggleActivation') {
+    isActivated = !isActivated;
+  } else if (request.action === 'getActivationState') {
+    sendResponse({ isActivated });
+  }
+});
+
 function createColorSwatch(color) {
   const swatch = document.createElement('span');
   swatch.style.backgroundColor = color;
@@ -76,6 +86,8 @@ document.addEventListener('mousemove', (event) => {
 });
 
 document.addEventListener('mouseover', (event) => {
+  if (!isActivated) return;
+
   highlightAllChildren(event.target, true);
 
   const infoBox = createInfoBox(event.target, event.clientX, event.clientY);
@@ -84,6 +96,8 @@ document.addEventListener('mouseover', (event) => {
 });
 
 document.addEventListener('mouseout', (event) => {
+  if (!isActivated) return;
+
   highlightAllChildren(event.target, false);
 
   if (event.target.infoBox) {
@@ -91,3 +105,4 @@ document.addEventListener('mouseout', (event) => {
     event.target.infoBox = null;
   }
 });
+

@@ -1,16 +1,24 @@
 {
-  "manifest_version": 3,
-  "name": "Element Highlighter",
-  "version": "1.0",
-  "description": "Highlights elements with a red color when hovered over.",
-  "permissions": [
-    "activeTab"
-  ],
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content_script.js"],
-      "css": ["highlight.css"]
+    "name": "Element Highlighter",
+    "version": "1.0",
+    "description": "Highlights elements on a webpage when hovered.",
+    "manifest_version": 3,
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "48": "icon48.png"
+      }
+    },
+    "permissions": ["activeTab"],
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content_script.js"],
+        "css": ["highlight.css"]
+      }
+    ],
+    "icons": {
+      "48": "icon48.png"
     }
-  ]
-}
+  }
+  
