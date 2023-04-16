@@ -2,6 +2,14 @@
     background-color: rgba(99, 94, 88, 0.071);
     outline: 2px solid rgb(238, 12, 68) !important;
   }
+
+  .hover-effect {
+    position: relative !important;
+    transform: scale(1.1) !important;
+    z-index: 1000 !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+    transition: transform 0.2s ease-in-out !important;
+  }
   
   .element-info-box {
     outline: 2px solid rgb(12, 80, 238) !important;

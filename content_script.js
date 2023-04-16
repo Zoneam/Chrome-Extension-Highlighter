@@ -10,6 +10,24 @@ function createColorSwatch(color) {
   return swatch;
 }
 
+function getRandomColor(depth) {
+  const colors = ['#FF5733', '#FFC300', '#DAF7A6', '#C70039', '#900C3F', '#581845'];
+  return colors[depth % colors.length];
+}
+
+function highlightAllChildren(element, add, depth = 0) {
+  if (add) {
+    const color = getRandomColor(depth);
+    element.style.outline = `2px solid ${color}`;
+  } else {
+    element.style.outline = '';
+  }
+
+  Array.from(element.children).forEach((child) => {
+    highlightAllChildren(child, add, depth + 1);
+  });
+}
+
 function createInfoBox(element, mouseX, mouseY) {
   const box = document.createElement('div');
   box.className = 'element-info-box';
@@ -51,16 +69,14 @@ document.addEventListener('mousemove', (event) => {
   const mouseX = event.clientX;
   const mouseY = event.clientY;
 
-  if (event.target.classList.contains('highlight-element')) {
-    if (event.target.infoBox) {
-      event.target.infoBox.style.top = mouseY + 20 + 'px';
-      event.target.infoBox.style.left = mouseX + 20 + 'px';
-    }
+  if (event.target.infoBox) {
+    event.target.infoBox.style.top = mouseY + 20 + 'px';
+    event.target.infoBox.style.left = mouseX + 20 + 'px';
   }
 });
 
 document.addEventListener('mouseover', (event) => {
-  event.target.classList.add('highlight-element');
+  highlightAllChildren(event.target, true);
 
   const infoBox = createInfoBox(event.target, event.clientX, event.clientY);
   event.target.infoBox = infoBox;
@@ -68,7 +84,8 @@ document.addEventListener('mouseover', (event) => {
 });
 
 document.addEventListener('mouseout', (event) => {
-  event.target.classList.remove('highlight-element');
+  highlightAllChildren(event.target, false);
+
   if (event.target.infoBox) {
     document.body.removeChild(event.target.infoBox);
     event.target.infoBox = null;
