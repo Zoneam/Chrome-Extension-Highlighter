@@ -21,5 +21,6 @@ activateButton.addEventListener('click', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       chrome.tabs.sendMessage(tabs[0].id, { action: 'toggleActivation' });
       activateButton.textContent = activateButton.textContent === 'Activate' ? 'Deactivate' : 'Activate';
+      window.close();
     });
 });

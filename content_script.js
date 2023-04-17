@@ -38,6 +38,18 @@ function highlightAllChildren(element, add, depth = 0) {
   });
 }
 
+function countDescendants(element) {
+  let count = 0;
+
+  if (element.children.length > 0) {
+    Array.from(element.children).forEach((child) => {
+      count += 1 + countDescendants(child);
+    });
+  }
+
+  return count;
+}
+
 function createInfoBox(element, mouseX, mouseY) {
   const box = document.createElement('div');
   box.className = 'element-info-box';
@@ -61,6 +73,12 @@ function createInfoBox(element, mouseX, mouseY) {
 
   const computedStyle = window.getComputedStyle(element);
   const styles = ['width', 'height', 'background-color', 'color', 'font-size', 'margin', 'padding', 'border'];
+
+  // Add the depth row
+  const depthRow = document.createElement('div');
+  depthRow.className = 'depth-row';
+  depthRow.textContent = `No of Descendants: ${countDescendants(element)}`; // Use the countDescendants function
+  box.appendChild(depthRow);
 
   styles.forEach((style) => {
     const row = document.createElement('div');
